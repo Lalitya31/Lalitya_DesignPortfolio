@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #050b1a;
+  --blue-deep: #0b1f3a;
+  --blue-mid: #1e5eff;
+  --blue-light: #5fa8ff;
+  --blue-glow: rgba(95, 168, 255, 0.25);
+  --blue-border: rgba(95, 168, 255, 0.18);
+  --glass-bg: rgba(5, 11, 26, 0.6);
+  --text-primary: #e8f4ff;
+  --text-muted: rgba(232, 244, 255, 0.45);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #050b1a;
+  color: #e8f4ff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050b1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(95, 168, 255, 0.4);
+  border-radius: 2px;
+}
+
+::selection {
+  background: rgba(95, 168, 255, 0.3);
+  color: #fff;
+}
+
+/* Scanline effect for boot screen */
+.scanline {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(to bottom,
+      transparent 0px,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px);
+}
+
+/* CRT noise texture */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Blinking cursor */
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 10px;
+  height: 1.1em;
+  background: #5fa8ff;
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-start infinite;
+}
+
+/* Responsive classes */
+@media (max-width: 768px) {
+  .show-mobile-menu {
+    display: flex !important;
+  }
+
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 3rem !important;
+  }
+
+  .hero-cards {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bento-large,
+  .bento-small {
+    grid-column: span 1 !important;
+  }
+
+  .process-steps {
+    grid-template-columns: 1fr !important;
+  }
+
+  .timeline-line,
+  .timeline-progress {
+    display: none !important;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .identity-text {
+    font-size: clamp(2.5rem, 10vw, 4rem) !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .bento-large {
+    grid-column: span 6 !important;
+  }
+
+  .bento-small {
+    grid-column: span 6 !important;
+  }
+
+  .process-steps {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Additional cinematic styles */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+:root{
+  --accent-start: #1e5eff;
+  --accent-mid: #5fa8ff;
+  --accent-end: #bfe4ff;
+}
+
+.ghost-word{
+  position: absolute;
+  z-index: 0;
+  left: 6%;
+  top: 18%;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: clamp(6rem, 18vw, 18vw);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: rgba(232,244,255,0.03);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.diagonal-divider{
+  height: 1px;
+  background: linear-gradient(120deg, transparent, rgba(95,168,255,0.12) 35%, rgba(95,168,255,0.06) 50%, transparent 70%);
+  transform: skewY(-3deg);
+  margin: 3rem 0;
+}
+
+.cursor-glow{position:fixed;left:0;top:0;pointer-events:none;mix-blend-mode:screen;z-index:50}
+.cursor-glow .blob{width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(95,168,255,0.35), rgba(30,94,255,0.15) 25%, transparent 60%);filter:blur(42px);transform:translate(-50%,-50%)}
+
+.hero-mockup-clip{position:relative;overflow:visible}
+.hero-mockup-clip .mockup{position:absolute;right:-12%;top:6%;}
